@@ -84,6 +84,7 @@ class Deck
                 ($i == $this->rand['value'] && $v == 4)) {
                 foreach ($this->play1 as $ind => $val) {
                     if ($val['value'] == $i) {
+//                    if ($val['value'] == $i && $val['color'] == $this->rand['color']) {
                         unset($this->play1[$ind]);
                     }
                 }
@@ -92,6 +93,7 @@ class Deck
                 $tmp = [];
                 foreach ($this->play1 as $ind => $val) {
                     if ($val['value'] == $i) {
+//                    if ($val['value'] == $i && $val['color'] == $this->rand['color']) {
                         $tmp[] = $this->play1[$ind];
                         unset($this->play1[$ind]);
                     }
@@ -111,6 +113,7 @@ class Deck
                 ($v == 4 && $i == $this->rand['value'])) {
                 foreach ($this->play2 as $ind => $val) {
                     if ($val['value'] == $i) {
+//                    if ($val['value'] == $i && $val['color'] == $this->rand['color']) {
                         unset($this->play2[$ind]);
                     }
                 }
@@ -119,6 +122,7 @@ class Deck
                 $tmp = [];
                 foreach ($this->play2 as $ind => $val) {
                     if ($val['value'] == $i) {
+//                    if ($val['value'] == $i && $val['color'] == $this->rand['color']) {
                         $tmp[] = $this->play2[$ind];
                         unset($this->play2[$ind]);
                     }
