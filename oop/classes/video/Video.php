@@ -3,27 +3,14 @@
 class Video
 {
     private string $title;
-    private bool $flag;
     private int $rating;
+    private string $rent;
 
-    public function checkout(): void
+    public function __construct(int $rating = 0, string $title = '')
     {
-
-    }
-
-    public function return(): void
-    {
-
-    }
-
-    public function rating(): void
-    {
-
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
+        $this->title = $title;
+        $this->rating = $rating;
+        $this->rent = "No";
     }
 
     public function getRating(): int
@@ -31,9 +18,19 @@ class Video
         return $this->rating;
     }
 
-    public function isFlag(): bool
+    public function getTitle(): string
     {
-        return $this->flag;
+        return $this->title;
+    }
+
+    public function setRent(string $rent): void
+    {
+        $this->rent = $rent;
+    }
+
+    public function getRent(): string
+    {
+        return $this->rent;
     }
 
 }
