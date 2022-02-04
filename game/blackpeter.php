@@ -28,10 +28,14 @@ class Deck
         if ($toggle == 0) {
             $key = array_rand($this->play1, 1);
             $this->rand = $this->play1[$key];
+            $this->play2[] = $this->play1[$key];
+            unset($this->play1[$key]);
         }
         if ($toggle == 1) {
             $key = array_rand($this->play2, 1);
             $this->rand = $this->play2[$key];
+            $this->play1[] = $this->play2[$key];
+            unset($this->play2[$key]);
         }
     }
 
@@ -63,6 +67,11 @@ class Deck
 
         $this->play1 = array_slice($this->cards, 0, $size);
         $this->play2 = array_slice($this->cards, $size);
+        $this->play1[] = [
+            'value' => 'JOK',
+            'symbol' => '♠',
+            'color' => 'black'
+        ];
     }
 
     public function deleteDoublePlayer1(): void
@@ -71,7 +80,8 @@ class Deck
 
         foreach ($key as $i => $v) {
             if ($v === 1) continue;
-            if (($i == $this->rand['value'] && $v == 2) || ($i == $this->rand['value'] && $v == 4)) {
+            if (($i == $this->rand['value'] && $v == 2) ||
+                ($i == $this->rand['value'] && $v == 4)) {
                 foreach ($this->play1 as $ind => $val) {
                     if ($val['value'] == $i) {
                         unset($this->play1[$ind]);
@@ -97,7 +107,8 @@ class Deck
 
         foreach ($key as $i => $v) {
             if ($v === 1) continue;
-            if (($v == 2 && $i == $this->rand['value']) || ($v == 4 && $i == $this->rand['value'])) {
+            if (($v == 2 && $i == $this->rand['value']) ||
+                ($v == 4 && $i == $this->rand['value'])) {
                 foreach ($this->play2 as $ind => $val) {
                     if ($val['value'] == $i) {
                         unset($this->play2[$ind]);
@@ -137,6 +148,23 @@ class Deck
 $a = new Deck();
 
 $toggle = null;
+
+echo "================================\n";
+echo '   ♔♔♔ Start ♔♔♔' . PHP_EOL;
+echo "================================\n";
+
+echo "Player1: ";
+foreach ($a->getPlay1() as $v) {
+    echo "[{$v['value']}{$v['symbol']}]";
+}
+echo PHP_EOL;
+
+echo "--------------------------------\n";
+
+echo "Player2: ";
+foreach ($a->getPlay2() as $v) {
+    echo "[{$v['value']}{$v['symbol']}]";
+}
 
 echo "\n================================\n";
 $s = readline('Start[enter], exit[e]: ');
@@ -181,16 +209,13 @@ while (true) {
     }
 
     // Check
-    if (count(array_column($a->getPlay1(), 'value')) == count(array_unique(array_column($a->getPlay1(), 'value')))) {
-        echo PHP_EOL;
+    if (count($a->getPlay1()) == 0) {
+        echo "\nWin Player1 !\n";
         exit;
-
     }
-
-    if (count(array_column($a->getPlay2(), 'value')) == count(array_unique(array_column($a->getPlay2(), 'value')))) {
-        echo PHP_EOL;
+    if (count($a->getPlay2()) == 0) {
+        echo "\nWin Player2 !\n";
         exit;
-
     }
 
 }
