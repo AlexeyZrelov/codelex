@@ -8,8 +8,6 @@ $q = json_decode(file_get_contents("https://data.gov.lv/dati/lv/api/3/action/dat
 
 $data = $q->result->records;
 
-var_dump($offset);
-
 ?>
 
 <form method="get" action="/">
