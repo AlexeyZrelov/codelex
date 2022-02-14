@@ -73,7 +73,7 @@ span.psw {
         </form>
     </div>
     <div>
-        <form action="app/login.php" method="post">
+        <form action="app/views/login.php" method="post">
             <div class="container">
                 <input type="text" placeholder="Username" name="uid" required>
                 <input type="password" placeholder="Password" name="pwd" required>
