@@ -50,9 +50,6 @@ span.psw {
             display: block;
             float: none;
         }
-  .cancelbtn {
-            width: 100%;
-        }
 }
 </style>
 </head>
@@ -64,10 +61,10 @@ span.psw {
     <div>
         <form action="app/views/signup.php" method="post">
             <div class="container">
-                <input type="text" placeholder="Username" name="uid" required>
-                <input type="password" placeholder="Password" name="pwd" required>
-                <input type="password" placeholder="Repeat password" name="pwdrepeat" required>
-                <input type="text" placeholder="E-mail" name="email" required>
+                <input type="text" placeholder="Username" name="uid">
+                <input type="password" placeholder="Password" name="pwd">
+                <input type="password" placeholder="Repeat password" name="pwdrepeat">
+                <input type="text" placeholder="E-mail" name="email">
                 <button type="submit" name="submit">SIGN UP</button>
             </div>
         </form>

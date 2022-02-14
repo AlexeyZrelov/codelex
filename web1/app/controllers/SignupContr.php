@@ -1,4 +1,5 @@
 <?php
+require_once '../models/SignupModel.php';
 
 class SignupContr extends SignupModel
 {
@@ -19,31 +20,31 @@ class SignupContr extends SignupModel
     {
         if ($this->emptyInput() == false) {
             // echo "Empty input!";
-            header("location: ../index.php?error=emptyinput");
+            header("location: ../../index.php?error=emptyinput");
             exit();
         }
 
         if ($this->invalidUid() == false) {
             // echo "Invalid username!";
-            header("location: ../index.php?error=username");
+            header("location: ../../index.php?error=username");
             exit();
         }
 
         if ($this->invalidEmail() == false) {
             // echo "Invalid email!";
-            header("location: ../index.php?error=email");
+            header("location: ../../index.php?error=email");
             exit();
         }
 
         if ($this->pwdMatch() == false) {
             // echo "Password don't math!";
-            header("location: ../index.php?error=passwordmatch");
+            header("location: ../../index.php?error=passwordmatch");
             exit();
         }
 
         if ($this->uidTakenCheck() == false) {
             // echo "Username or email taken!";
-            header("location: ../index.php?error=useroremailtaken");
+            header("location: ../../index.php?error=useroremailtaken");
             exit();
         }
 
