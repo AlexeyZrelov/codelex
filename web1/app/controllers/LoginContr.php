@@ -1,10 +1,9 @@
 <?php
-require_once '../models/LoginModel.php';
 
 class LoginContr extends LoginModel
 {
-    private $uid;
-    private $pwd;
+    private string $uid;
+    private string $pwd;
 
     public function __construct($uid, $pwd)
     {
@@ -12,7 +11,7 @@ class LoginContr extends LoginModel
         $this->pwd = $pwd;
     }
 
-    public function loginUser()
+    public function loginUser(): void
     {
         if ($this->emptyInput() == false) {
             // echo "Empty input!";
@@ -23,9 +22,9 @@ class LoginContr extends LoginModel
         $this->getUser($this->uid, $this->pwd);
     }
 
-    private function emptyInput()
+    private function emptyInput(): bool
     {
-        $result = null;
+//        $result = null;
         if (empty($this->uid) || empty($this->pwd)) {
             $result = false;
         } else {

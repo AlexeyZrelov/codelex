@@ -1,5 +1,4 @@
 <?php
-require_once '../models/SignupModel.php';
 
 class SignupContr extends SignupModel
 {
@@ -42,18 +41,18 @@ class SignupContr extends SignupModel
             exit();
         }
 
-        if ($this->uidTakenCheck() == false) {
-            // echo "Username or email taken!";
-            header("location: ../../index.php?error=useroremailtaken");
-            exit();
-        }
+//        if ($this->uidTakenCheck() == false) {
+//            // echo "Username or email taken!";
+//            header("location: ../../index.php?error=useroremailtaken");
+//            exit();
+//        }
 
         $this->setUser($this->uid, $this->pwd, $this->email);
     }
 
-    private function emptyInput()
+    private function emptyInput(): bool
     {
-        $result = null;
+//        $result = null;
         if (empty($this->uid) || empty($this->pwd) || empty($this->pwdRepeat) || empty($this->email)) {
             $result = false;
         } else {
@@ -62,9 +61,9 @@ class SignupContr extends SignupModel
         return $result;
     }
 
-    private function invalidUid()
+    private function invalidUid(): bool
     {
-        $result = null;
+//        $result = null;
         if (!preg_match("/^[a-zA-Z0-9]*$/", $this->uid)) {
             $result = false;
         } else {
@@ -73,9 +72,9 @@ class SignupContr extends SignupModel
         return $result;
     }
 
-    private function invalidEmail()
+    private function invalidEmail(): bool
     {
-        $result = null;
+//        $result = null;
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $result = false;
         } else {
@@ -84,9 +83,9 @@ class SignupContr extends SignupModel
         return $result;
     }
 
-    private function pwdMatch()
+    private function pwdMatch(): bool
     {
-        $result = null;
+//        $result = null;
         if ($this->pwd !== $this->pwdRepeat) {
             $result = false;
         } else {
@@ -95,9 +94,9 @@ class SignupContr extends SignupModel
         return $result;
     }
 
-    private function uidTakenCheck()
+    private function uidTakenCheck(): bool
     {
-        $result = null;
+//        $result = null;
         if (!$this->checkUser($this->uid, $this->email)) {
             $result = false;
         } else {

@@ -55,7 +55,15 @@ span.psw {
 </head>
 <body>
 
-<h2>Login Form</h2>
+<?php
+
+    if (isset($_SESSION["useruid"])) {
+        echo "<h2>Hi {$_SESSION["useruid"]}</h2>";
+    } else {
+        echo "<h2>Login Form</h2>";
+    }
+
+?>
 
 <div style="display: flex;">
     <div>
