@@ -1,5 +1,4 @@
 <?php
-//namespace App\Views;
 
 if (isset($_POST["submit"])) {
 
