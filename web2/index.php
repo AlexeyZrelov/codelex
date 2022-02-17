@@ -22,9 +22,9 @@ try {
 
 if (isset($_POST["submit"])) {
 
-    $name = $_POST["name"];
-    $sName= $_POST["sname"];
-    $pKod = $_POST["pkod"];
+    $name = trim(htmlentities($_POST["name"]));
+    $sName= trim(htmlentities($_POST["sname"]));
+    $pKod = trim(htmlentities($_POST["pkod"]));
 
     $prs = new Person($name, $sName, $pKod);
 
@@ -37,63 +37,30 @@ if (isset($_POST["submit"])) {
 
 }
 
+try {
+    $person = $conn->fetchAllAssociative('SELECT * FROM persons');
+} catch (\Doctrine\DBAL\Exception $e) {
+    echo "Error!: " . $e->getMessage() . "\n";
+    die();
+}
+
+//echo "<pre>";
+//print_r($person);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-        form {border: 3px solid #f1f1f1;}
-
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #04AA6D;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .container {
-            padding: 16px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-        }
-    </style>
+    <title>SIGN UP</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<div style="display: flex;">
+<div style="width: 50%; margin: auto">
+    <h4>SIGN UP</h4>
     <div>
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+        <form class="form" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
             <div class="container">
                 <input type="text" placeholder="Name" name="name">
                 <input type="text" placeholder="Surname" name="sname">
@@ -102,14 +69,48 @@ if (isset($_POST["submit"])) {
             </div>
         </form>
     </div>
-    <div>
-<!--        <form action="app/login.php" method="post">-->
-<!--            <div class="container">-->
-<!--                <input type="text" placeholder="Username" name="uid" required>-->
-<!--                <input type="password" placeholder="Password" name="pwd" required>-->
-<!--                <button type="submit" name="submit">LOGIN</button>-->
-<!--            </div>-->
-<!--        </form>-->
+    <br>
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Nr.</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Person kode</th>
+                <th>...</th>
+            </tr>
+
+            <?php
+                foreach ($person as $val) {
+            ?>
+
+            <tr>
+                <td>
+                    <?php echo $val['idpersons']; ?>
+                </td>
+                <td>
+                    <?php echo $val['person_name']; ?>
+                </td>
+                <td>
+                    <?php echo $val['person_surname']; ?>
+                </td>
+                <td>
+                    <?php echo $val['person_kod']; ?>
+                </td>
+                <td>
+                    <form action='' method='get'>
+                        <input type='hidden' name='id' value='<?php echo $val['idpersons']; ?>' />
+                        <input type='submit' value='Delet'>
+                    </form>
+                </td>
+            </tr>
+
+            <?php
+                }
+            ?>
+
+        </table>
+
     </div>
 </div>
 
