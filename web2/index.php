@@ -37,15 +37,23 @@ if (isset($_POST["submit"])) {
 
 }
 
+if (isset($_POST['delete'])) {
+
+    try {
+        $conn->delete('persons', array('idpersons' => $_POST['id']));
+    } catch (\Doctrine\DBAL\Exception $e) {
+        echo "Error!: " . $e->getMessage() . "\n";
+        die();
+    }
+
+}
+
 try {
     $person = $conn->fetchAllAssociative('SELECT * FROM persons');
 } catch (\Doctrine\DBAL\Exception $e) {
     echo "Error!: " . $e->getMessage() . "\n";
     die();
 }
-
-//echo "<pre>";
-//print_r($person);
 
 ?>
 
@@ -81,12 +89,15 @@ try {
             </tr>
 
             <?php
+                $cnt = 0;
                 foreach ($person as $val) {
+                    $cnt ++;
             ?>
 
             <tr>
                 <td>
-                    <?php echo $val['idpersons']; ?>
+<!--                    --><?php //echo $val['idpersons']; ?>
+                    <?php echo $cnt; ?>
                 </td>
                 <td>
                     <?php echo $val['person_name']; ?>
@@ -98,9 +109,9 @@ try {
                     <?php echo $val['person_kod']; ?>
                 </td>
                 <td>
-                    <form action='' method='get'>
+                    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
                         <input type='hidden' name='id' value='<?php echo $val['idpersons']; ?>' />
-                        <input type='submit' value='Delet'>
+                        <button type="submit" name="delete">Delete</button>
                     </form>
                 </td>
             </tr>
