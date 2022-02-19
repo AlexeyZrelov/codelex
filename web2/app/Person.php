@@ -10,9 +10,19 @@ class Person
 
     public function __construct(string $name, string $surname, string $pKod)
     {
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->pKod = $pKod;
+        $this->name = $this->validatePerson($name);
+        $this->surname = $this->validatePerson($surname);
+        $this->pKod = $this->validatePerson($pKod);
+
+    }
+
+    private function validatePerson($arg): string
+    {
+        $value = trim($arg);
+        $value = stripcslashes($arg);
+        $value = strip_tags($arg);
+
+        return $value;
     }
 
     public function getName(): string
@@ -29,4 +39,5 @@ class Person
     {
         return $this->pKod;
     }
+
 }

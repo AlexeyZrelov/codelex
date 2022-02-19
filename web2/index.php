@@ -22,11 +22,7 @@ try {
 
 if (isset($_POST["submit"])) {
 
-    $name = trim(htmlentities($_POST["name"]));
-    $sName= trim(htmlentities($_POST["sname"]));
-    $pKod = trim(htmlentities($_POST["pkod"]));
-
-    $prs = new Person($name, $sName, $pKod);
+    $prs = new Person($_POST["name"], $_POST["sname"], $_POST["pkod"]);
 
     try {
         $conn->insert('persons', array('person_name' => $prs->getName(), 'person_surname' => $prs->getSurname(), 'person_kod' => $prs->getPKod()));
@@ -96,7 +92,6 @@ try {
 
             <tr>
                 <td>
-<!--                    --><?php //echo $val['idpersons']; ?>
                     <?php echo $cnt; ?>
                 </td>
                 <td>
