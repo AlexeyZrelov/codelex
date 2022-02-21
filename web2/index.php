@@ -53,7 +53,6 @@ if (isset($_POST['save'])) {
         die();
     }
 
-    header("location: /");
 }
 
 try {
@@ -79,16 +78,16 @@ try {
         <form class="form" action="" method="post">
             <div class="container">
 
-            <?php if (isset($_GET['edit'])) {
+            <?php if (isset($_POST['edit'])) {
 
                 try {
-                    $person1 = $conn->fetchAssociative('SELECT * FROM persons WHERE idpersons = ?', array($_GET['id']));;
+                    $person1 = $conn->fetchAssociative('SELECT * FROM persons WHERE idpersons = ?', array($_POST['id']));
                 } catch (\Doctrine\DBAL\Exception $e) {
                     echo "Error!: " . $e->getMessage() . "\n";
                     die();
                 }
             ?>
-                <input type='hidden' name='id' value='<?php echo $_GET['id']; ?>' />
+                <input type='hidden' name='id' value='<?php echo $_POST['id']; ?>' />
                 <input type="text" placeholder="Name" name="name" value="<?php echo $person1['person_name']; ?>">
                 <input type="text" placeholder="Surname" name="sname" value="<?php echo $person1['person_surname']; ?>">
                 <input type="text" placeholder="Person kod" name="pkod" value="<?php echo $person1['person_kod']; ?>">
@@ -144,7 +143,7 @@ try {
                     </form>
                 </td>
                 <td>
-                    <form action="" method="get">
+                    <form action="" method="post">
                         <input type='hidden' name='id' value='<?php echo $val['idpersons']; ?>' />
                         <button type="submit" name="edit">Edit</button>
                     </form>
