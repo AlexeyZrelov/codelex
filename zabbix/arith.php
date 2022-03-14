@@ -31,24 +31,31 @@ if ($sign[0] != '*') {
     $spaceX = strlen($total) - strlen($y);
     $spaceY = strlen($total) - (strlen($y)+1);
 
-    $gapBodyX = str_repeat(" ", $spaceX);
-    $gapBodyY = str_repeat(" ", $spaceY);
+    $n = strlen($y);
 
     for ($i = 0; $i < strlen($y); $i++) {
 
+        $n--;
+
+        $gapBodyX = @str_repeat(" ", $spaceX);
+        $gapBodyY = str_repeat(" ", $spaceY);
+
         $body .=  $gapBodyX . eval('return '.$reverse[$i].'*'.$x.';') . "\n" . $gapBodyY;
+
+        $spaceX = $n--;
+        $spaceY = 0;
 
     }
 
     if (strlen($y) == 1) {
 
         $output .= $gapX . $x . "\n" . $gapY . $sign[0] . $y . "\n"
-            . $gapY . "\n" . $dashes . "\n" . $gap . $total . "\n";
+            . $dashes . "\n" . $gap . $total . "\n";
 
     } else {
 
         $output .= $gapX . $x . "\n" . $gapY . $sign[0] . $y . "\n"
-            . $gapY . $dashes1 . "\n" . $body . "\n"
+            . $gapY . $dashes1 . "\n" . $body
             . $dashes . "\n" . $gap . $total . "\n";
 
     }
