@@ -11,6 +11,11 @@ mouse
 2
 ok
 ok
+
+Sample output:
+The door cannot be opened.
+Ordering is possible.
+The door cannot be opened.
 */
 
 $N = [
